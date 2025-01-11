@@ -81,6 +81,13 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          build-args: |
+            NODE_VERSION=22
+            SERVER_PORT=3030
+            WEBSOCKET_PORT=3031
+            DATABASE_URL=postgres://playpals-admin:Admin123@postgres:5432/playpals
+            PROD_DATABASE_URL=postgresql://postgres.yldvcfvcgnlhggfczksq:Shre@2022@aws-0-ap-south-1.pooler.supabase.com:6543/postgres?pgbouncer=true
+            PROD_DIRECT_URL=postgresql://postgres.yldvcfvcgnlhggfczksq:Shre@2022@aws-0-ap-south-1.pooler.supabase.com:5432/postgres
 
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
