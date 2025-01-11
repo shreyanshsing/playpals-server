@@ -15,6 +15,8 @@ services:
       context: . # Path to your app's Dockerfile
       dockerfile: Dockerfile
     container_name: playpals-app
+    env_file:
+      - .env
     environment:
       SERVER_PORT: ${SERVER_PORT}
       WEBSOCKET_PORT: ${WEBSOCKET_PORT}

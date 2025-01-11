@@ -13,6 +13,8 @@ RUN npm install
 # Copy the entire project directory
 COPY . .
 
+COPY .env .env
+
 # Build the TypeScript code
 RUN npm run build
 
