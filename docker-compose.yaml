@@ -10,6 +10,22 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-
+  app:
+    build:
+      context: . # Path to your app's Dockerfile
+      dockerfile: Dockerfile
+    container_name: playpals-app
+    environment:
+      SERVER_PORT: ${SERVER_PORT}
+      WEBSOCKET_PORT: ${WEBSOCKET_PORT}
+      DATABASE_URL: ${DATABASE_URL}
+    ports:
+      - "3030:3030" # Expose the app's port
+      - "3031:3031" # Expose the app's websocket port
+    depends_on:
+      - postgres # Ensure the database starts first
+    volumes:
+      - .:/usr/src/app # Mount your app code for development purposes
+    command: ["npm", "run", "start"] # Start the app in development mode
 volumes:
   postgres_data:
