@@ -19,6 +19,8 @@ services:
       SERVER_PORT: ${SERVER_PORT}
       WEBSOCKET_PORT: ${WEBSOCKET_PORT}
       DATABASE_URL: ${DATABASE_URL}
+      PROD_DATABASE_URL: ${PROD_DATABASE_URL}
+      PROD_DIRECT_URL: ${PROD_DIRECT_URL}
     ports:
       - "3030:3030" # Expose the app's port
       - "3031:3031" # Expose the app's websocket port
