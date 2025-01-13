@@ -3,9 +3,8 @@ import "dotenv/config";
 import bodyParser from 'body-parser';
 import router from './services/router';
 import cors from 'cors';
-import { startWebsocketServer } from './services/websocket';
 
-const PORT = process.env.SERVER_PORT;
+const PORT = process.env.PORT;
 
 const app = express();
 
@@ -16,6 +15,5 @@ app.use(bodyParser.json());
 app.use('/api', router);
 
 app.listen(PORT, () => {
-  startWebsocketServer();
   console.log(`Server is running on http://localhost:${PORT}`);
 });

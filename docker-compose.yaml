@@ -1,13 +1,15 @@
 services:
   postgres:
     image: postgres:latest
-    container_name: playpals-postgres
+    container_name: postgres
     environment:
       POSTGRES_USER: playpals-admin
       POSTGRES_PASSWORD: Admin123
       POSTGRES_DB: playpals
     ports:
       - "5432:5432"
+    expose:
+      - "5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
   app:
@@ -18,18 +20,16 @@ services:
     env_file:
       - .env
     environment:
-      SERVER_PORT: ${SERVER_PORT}
-      WEBSOCKET_PORT: ${WEBSOCKET_PORT}
+      PORT: ${PORT}
       DATABASE_URL: ${DATABASE_URL}
       PROD_DATABASE_URL: ${PROD_DATABASE_URL}
       PROD_DIRECT_URL: ${PROD_DIRECT_URL}
     ports:
       - "3030:3030" # Expose the app's port
-      - "3031:3031" # Expose the app's websocket port
     depends_on:
       - postgres # Ensure the database starts first
     volumes:
       - .:/usr/src/app # Mount your app code for development purposes
-    command: ["npm", "run", "start"] # Start the app in development mode
+    command: ["npm", "run", "dev"] # Start the app in development mode
 volumes:
   postgres_data:

@@ -18,7 +18,7 @@ COPY . .
 RUN npm run build
 
 # Expose both HTTP and WebSocket ports
-EXPOSE 3030 3031
+EXPOSE 3030 5432
 
 # Run Prisma Migrate
 RUN npx prisma migrate deploy
