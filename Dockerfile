@@ -20,6 +20,15 @@ RUN npm run build
 # Expose both HTTP and WebSocket ports
 EXPOSE 3030 5432
 
+RUN mkdir -p prisma/migrations/0_init
+
+RUN npx prisma migrate diff \
+--from-empty \
+--to-schema-datamodel prisma/schema.prisma \
+--script > prisma/migrations/0_init/migration.sql
+
+RUN npx prisma migrate resolve --applied 0_init
+
 # Run Prisma Migrate
 RUN npx prisma migrate deploy
 
